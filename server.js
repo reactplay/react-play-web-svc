@@ -7,7 +7,9 @@ import { UpdateHackRPlayBadges } from "./models/badges/hack-r-play-2022.js";
 var app = express();
 
 // Initialization
-app.set("port", process.env.SERVER_PORT || 4000);
+if (process.env.SERVER_PORT) {
+  app.set("port", process.env.SERVER_PORT);
+}
 
 const BACKEND_URL = `${process.env.NHOST_BACKEND_URL}/${process.env.NHOST_VERSION}/${process.env.NHOST_ENDPOINT}`;
 console.log(BACKEND_URL);
