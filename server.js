@@ -26,7 +26,7 @@ app.post("/badges", function (req, res) {
       response: "Successfully updated badges.",
     };
     console.log(response);
-    res.end(JSON.stringify(response));
+    res.end(JSON.stringify(result));
   });
 });
 

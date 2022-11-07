@@ -88,6 +88,11 @@ export const UpdateHackRPlayBadges = (url) => {
       console.log(submitters);
       console.log(`Winners : ${winners.length}`);
       console.log(winners);
+      return {
+        winners: winners,
+        submitters: submitters,
+        participants: participants,
+      };
     })
     .catch((err) => {
       // console.error(err);
