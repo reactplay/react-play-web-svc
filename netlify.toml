@@ -1,0 +1,11 @@
+[build]
+
+  base = "."
+  publish = "build/"
+  command = "node server.js"
+
+[[redirects]]
+
+  from = "/*"
+  to = "/index.html"
+  status = 200
