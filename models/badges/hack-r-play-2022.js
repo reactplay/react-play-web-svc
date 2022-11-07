@@ -47,7 +47,7 @@ export const UpdateHackRPlayBadges = (url) => {
     .then((res) => {
       const submittedContributors = res[0];
       const completedIdeas = res[1];
-      const winnersIdeas = res[2];
+      const winningIdeas = res[2];
       const authorIds = res[3];
 
       const allContributors = submittedContributors;
@@ -59,42 +59,81 @@ export const UpdateHackRPlayBadges = (url) => {
         });
       });
 
-      const participants = [];
-      const submitters = [];
-      const winners = [];
-      allContributors.forEach((cont) => {
-        if (participants.indexOf(cont.user_id) < 0) {
-          participants.push(cont.user_id);
-        }
+      const contributorsId = getAllContributorsId(allContributors);
+      const completedContributorsId = getAllCompletedContributorsId(
+        allContributors,
+        completedIdeas
+      );
+      const winners = getAllWinnersId(allContributors, winningIdeas);
+      //   allContributors.forEach((cont) => {
+      //     if (participants.indexOf(cont.user_id) < 0) {
+      //       participants.push(cont.user_id);
+      //     }
 
-        const completedIdeaFilter = completedIdeas.filter(
-          (ci) => ci.idea_id === cont.idea_id
-        );
-        if (
-          completedIdeaFilter.length > 0 &&
-          submitters.indexOf(cont.user_id) < 0
-        ) {
-          submitters.push(cont.user_id);
-        }
-      });
-      winnersIdeas.forEach((wi) => {
-        if (wi.position_type.toLowerCase() === "w") {
-          winners.push(wi.user_id);
-        }
-      });
-      console.log(`Participants : ${participants.length}`);
-      console.log(participants);
-      console.log(`Submitters: ${submitters.length}`);
-      console.log(submitters);
+      //     const completedIdeaFilter = completedIdeas.filter(
+      //       (ci) => ci.idea_id === cont.idea_id
+      //     );
+      //     if (
+      //       completedIdeaFilter.length > 0 &&
+      //       submitters.indexOf(cont.user_id) < 0
+      //     ) {
+      //       submitters.push(cont.user_id);
+      //     }
+      //   });
+      //   winnersIdeas.forEach((wi) => {
+      //     if (wi.position_type.toLowerCase() === "w") {
+      //       winners.push(wi.user_id);
+      //     }
+      //   });
+      console.log(`Participants : ${contributorsId.length}`);
+      console.log(contributorsId);
+      console.log(`Submitters: ${completedContributorsId.length}`);
+      console.log(completedContributorsId);
       console.log(`Winners : ${winners.length}`);
       console.log(winners);
       return {
         winners: winners,
-        submitters: submitters,
-        participants: participants,
+        submitters: completedContributorsId,
+        participants: contributorsId,
       };
     })
     .catch((err) => {
       // console.error(err);
     });
+};
+
+const getAllContributorsId = (allContributors) => {
+  const participants = [];
+  allContributors.forEach((cont) => {
+    if (participants.indexOf(cont.user_id) < 0) {
+      participants.push(cont.user_id);
+    }
+  });
+  return participants;
+};
+
+const getAllCompletedContributorsId = (allContributors, completedIdeas) => {
+  const submitters = [];
+  allContributors.forEach((cont) => {
+    const completedIdeaFilter = completedIdeas.filter(
+      (ci) => ci.idea_id === cont.idea_id
+    );
+    if (
+      completedIdeaFilter.length > 0 &&
+      submitters.indexOf(cont.user_id) < 0
+    ) {
+      submitters.push(cont.user_id);
+    }
+  });
+  return submitters;
+};
+
+const getAllWinnersId = (allContributors, winningIdeas) => {
+  const winners = [];
+  winningIdeas.forEach((wi) => {
+    if (wi.position_type.toLowerCase() === "w") {
+      winners.push(wi.user_id);
+    }
+  });
+  return winners;
 };
