@@ -1,7 +1,7 @@
 import {
-	submit as gsubmit,
-	submit_multi as gsubmit_multi,
-} from 'json-graphql-parser/v2/index.js';
+  submit as gsubmit,
+  submit_multi as gsubmit_multi,
+} from "json-graphql-parser/v2/index.js";
 
 const BACKEND_URL = `${process.env.NHOST_BACKEND_URL}/${process.env.NHOST_VERSION}/${process.env.NHOST_ENDPOINT}`;
 
@@ -12,7 +12,7 @@ const BACKEND_URL = `${process.env.NHOST_BACKEND_URL}/${process.env.NHOST_VERSIO
  * @param {object}           reqheder Optional.
  */
 export const submit_multi = (requests, url, reqheder) => {
-	return gsubmit_multi(requests, BACKEND_URL);
+  return gsubmit_multi(requests, BACKEND_URL);
 };
 
 /**
@@ -23,11 +23,11 @@ export const submit_multi = (requests, url, reqheder) => {
  * @returns {Promise} single promise
  */
 export const submit = (request, url, reqheder) => {
-	return gsubmit(request, url);
+  return gsubmit(request, url, undefined, true);
 };
 
 export const submitMutation = (query, object) => {
-	const mutationQuery = query;
-	mutationQuery.object = object;
-	return submit(mutationQuery);
+  const mutationQuery = query;
+  mutationQuery.object = object;
+  return submit(mutationQuery);
 };

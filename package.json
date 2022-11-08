@@ -12,8 +12,11 @@
 	"type": "module",
 	"dependencies": {
 		"@nhost/nhost-js": "^1.5.2",
+		"@sendgrid/mail": "^7.7.0",
 		"dotenv": "^16.0.3",
 		"express": "^4.17.1",
-		"json-graphql-parser": "^0.1.9"
+		"json-graphql-parser": "^0.1.9",
+		"nodemailer": "^6.8.0",
+		"nodemailer-express-handlebars": "^5.0.0"
 	}
 }
