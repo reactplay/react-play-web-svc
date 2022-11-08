@@ -17,10 +17,7 @@ const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 console.log(BACKEND_URL);
 
 app.get("/", function (req, res) {
-  res.writeHead(200, { "Content-Type": "application/json" });
-  var response = { response: "The ReactPlay web service is running" };
-  console.log(response);
-  res.end(JSON.stringify(response));
+  res.sendStatus(200);
 });
 
 app.post("/badges", function (req, res) {
