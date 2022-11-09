@@ -14,9 +14,11 @@ if (process.env.SERVER_PORT) {
 
 const BACKEND_URL = `${process.env.NHOST_BACKEND_URL}/${process.env.NHOST_VERSION}/${process.env.NHOST_ENDPOINT}`;
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
-console.log(BACKEND_URL);
+
+console.log(SENDGRID_API_KEY);
 
 app.get("/", function (req, res) {
+  console.log("Healthcheck running");
   res.sendStatus(200);
 });
 
@@ -33,7 +35,7 @@ app.post("/badges", function (req, res) {
 
 app.post("/mail", function (req, res) {
   res.writeHead(200, { "Content-Type": "application/json" });
-  sendMail();
+  sendMail(SENDGRID_API_KEY);
   var response = {
     response: "Successfully sent email.",
   };
