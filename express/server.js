@@ -55,14 +55,16 @@ app.post("/mail", function (req, res) {
 
 router.get("/", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });
-  res.write("<h1>Hello from Express.js!</h1>");
+  res.write(
+    '<div style="display:flex;width:100%;height:100vh;justify-content:center;align-items:center;background:#010326"><div stle="flex:1"><span style="font-size:2rem;color:#FFFFFF">Welcome to <b><a href="https://reactplay.io" target="_blnk">ReactPlay</a> Web Service</b></span></div></div>'
+  );
   res.end();
 });
 router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 router.get("/hc", function (req, res) {
   res.writeHead(200, { "Content-Type": "text/html" });
-  res.write("<h1>Hello from ReactPlay Web Service</h1>");
+  res.write("<h1>ReactPlay web service is <b>Healthy</b></h1>");
   res.end();
 });
 
