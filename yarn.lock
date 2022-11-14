@@ -562,6 +562,11 @@ raw-body@2.5.1:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-play-pk@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-play-pk/-/react-play-pk-0.0.3.tgz#5d293fd051faee2e241e70628c13e64e7d9d49cc"
+  integrity sha512-1P8sj0JlHEuX+EIZ5TKKrq1jidn/vsdb2dxASMY48e+p3FNWdLcUl+MGL/1F8E9Xfrh+LkND39Y1PQjgFTfZOw==
+
 safe-buffer@5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.2.1.tgz#1eaf9fa9bdb1fdd4ec75f58f9cdb4e6b7827eec6"
