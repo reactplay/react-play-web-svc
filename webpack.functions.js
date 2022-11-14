@@ -1,5 +1,5 @@
-const nodeExternals = require("webpack-node-externals");
+const node_externals = require("webpack-node-externals");
 
 module.exports = {
-  externals: [nodeExternals()],
+  externals: [node_externals()],
 };
