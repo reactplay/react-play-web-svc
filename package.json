@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"repository": "git@github.com:reactplay/react-play-web-svc.git",
 	"scripts": {
-		"build": "netlify-lambda build express",
+		"build": "netlify-lambda build .",
     	"start": "nodemon server.js"
 	},
 	"type": "module",
@@ -20,7 +20,6 @@
 		"json-graphql-parser": "^0.1.9",
 		"netlify-lambda": "^2.0.15",
 		"nodemailer": "^6.8.0",
-		"nodemailer-express-handlebars": "^5.0.0",
 		"serverless-http": "^3.1.0"
 	}
 }
