@@ -25,7 +25,7 @@ const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 
 console.log(SENDGRID_API_KEY);
 
-app.get("/", function (req, res) {
+app.get("/hc", function (req, res) {
   res.writeHead(200, { "Content-Type": "text/html" });
   res.write("<h1>Hello from Express.js!</h1>");
   res.end();
