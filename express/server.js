@@ -12,13 +12,14 @@ const bodyParser = require("body-parser");
 
 // Configuration
 var app = express();
+const router = express.Router();
 
 // Initialization
 if (process.env.SERVER_PORT) {
   app.set("port", process.env.SERVER_PORT);
 }
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 const BACKEND_URL = `${process.env.NHOST_BACKEND_URL}/${process.env.NHOST_VERSION}/${process.env.NHOST_ENDPOINT}`;
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
@@ -27,7 +28,7 @@ console.log(SENDGRID_API_KEY);
 
 app.get("/hc", function (req, res) {
   res.writeHead(200, { "Content-Type": "text/html" });
-  res.write("<h1>Hello from Express.js!</h1>");
+  res.write("<h1>Hello from ReactPlay Web Service</h1>");
   res.end();
 });
 
@@ -52,14 +53,22 @@ app.post("/mail", function (req, res) {
   res.end(JSON.stringify({ result: "done" }));
 });
 
-// var server = app.listen(app.get("port"), function () {
-//   var host = server.address().address;
-//   var port = server.address().port;
+router.get("/", (req, res) => {
+  res.writeHead(200, { "Content-Type": "text/html" });
+  res.write("<h1>Hello from Express.js!</h1>");
+  res.end();
+});
+router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
+router.post("/", (req, res) => res.json({ postBody: req.body }));
+router.get("/hc", function (req, res) {
+  res.writeHead(200, { "Content-Type": "text/html" });
+  res.write("<h1>Hello from ReactPlay Web Service</h1>");
+  res.end();
+});
 
-//   console.log(
-//     `ReactPlay Web Service is running on  https://${os.hostname()}:${port}`
-//   );
-// });
+app.use(bodyParser.json());
+app.use("/.netlify/functions/server", router); // path must route to lambda
+app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
 // export default serverless(app);
 module.exports = app;
