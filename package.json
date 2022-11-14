@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"repository": "git@github.com:reactplay/react-play-web-svc.git",
 	"scripts": {
-		"build": "netlify-lambda build . --config webpack.functions.js",
+		"build": "netlify-lambda build . --config webpack.config.js",
 		"start": "nodemon server.js"
 	},
 	"dependencies": {
