@@ -24,7 +24,32 @@ export const GetUserDetailsQuery = (user_id) => {
         ],
       },
     },
-    return: ["displayName", "email"],
+    return: ["displayName", "email", "avatarUrl"],
+  };
+};
+
+
+export const GetUserAllBadgeQuery = (user_id) => {
+  return {
+    display: "Get User Badge Map",
+    name: "meta_user_badge_map",
+    function: "meta_user_badge_map",
+    where: {
+      clause: {
+        conditions: [
+          {
+            field: "user_id",
+            operator: "eq",
+            value: user_id,
+          }
+        ],
+      },
+    },
+    return: [
+      {
+        badge_id_map: ['image'],
+      },
+    ],
   };
 };
 

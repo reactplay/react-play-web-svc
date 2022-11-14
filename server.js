@@ -4,6 +4,11 @@ import express from "express";
 import { UpdateHackRPlayBadges } from "./models/badges/hack-r-play-2022.js";
 import { sendMail } from "./services/email/index.js";
 import string from "react-play-pk";
+import nodeHtmlToImage from "node-html-to-image";
+import { submit } from './services/submit.js';
+import { GetUserAllBadgeQuery, GetUserDetailsQuery } from './models/badges/queries.js';
+
+
 
 // Configuration
 var app = express();
@@ -23,6 +28,53 @@ app.get("/", function (req, res) {
   res.sendStatus(200);
 });
 
+app.get("/user/badges", async function (req, res) {
+
+  try {
+    const getUser = await submit(
+      GetUserDetailsQuery("4fa14525-8f98-45b9-9a8b-c1ba34c6ed43"),
+      BACKEND_URL
+    );
+    const getBadges = await submit(
+      GetUserAllBadgeQuery("4fa14525-8f98-45b9-9a8b-c1ba34c6ed43"),
+      BACKEND_URL
+    )
+    let images = ``;
+    for (let i of await getBadges) {
+      images = images.concat(`<img width="50" height="50" src="${i.badge_id_map.image}" />`);
+    }
+
+    const image = await nodeHtmlToImage({
+      html: `<html>
+      <style>
+      body{
+        width:500px;
+        height:300px;
+      }
+      </style>
+      <body>
+      <div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>      
+      <p>${await getUser[0].displayName}</p>
+      ${images}      
+      </body>  
+      </html>`,
+
+    });
+    res.writeHead(200, {
+      'Content-Type': 'image/png'
+    })
+    res.end(image, 'base64');
+  } catch (e) {
+    res.end("Something went wrong");
+  }
+
+})
+
 app.post("/badges", function (req, res) {
   res.writeHead(200, { "Content-Type": "application/json" });
   UpdateHackRPlayBadges(BACKEND_URL, SENDGRID_API_KEY).then((result) => {
@@ -33,6 +85,8 @@ app.post("/badges", function (req, res) {
     res.end(JSON.stringify(result));
   });
 });
+
+
 
 app.post("/mail", function (req, res) {
   res.writeHead(200, { "Content-Type": "application/json" });
