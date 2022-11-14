@@ -1,4 +1,4 @@
-export const GetAllParticipantIdeasMemberIdQuery = () => {
+const GetAllParticipantIdeasMemberIdQuery = () => {
   return {
     display: "Get All Participants",
     name: "hackathon_ideas_members",
@@ -7,7 +7,7 @@ export const GetAllParticipantIdeasMemberIdQuery = () => {
   };
 };
 
-export const GetUserDetailsQuery = (user_id) => {
+const GetUserDetailsQuery = (user_id) => {
   return {
     display: "Get User Details",
     name: "users",
@@ -28,7 +28,7 @@ export const GetUserDetailsQuery = (user_id) => {
   };
 };
 
-export const GetUserBadgeQuery = (user_id, badge_id) => {
+const GetUserBadgeQuery = (user_id, badge_id) => {
   return {
     display: "Get User Badge Map",
     name: "meta_user_badge_map",
@@ -54,7 +54,7 @@ export const GetUserBadgeQuery = (user_id, badge_id) => {
   };
 };
 
-export const GetAllAuthorsIdQuery = () => {
+const GetAllAuthorsIdQuery = () => {
   return {
     display: "Get All Author",
     name: "hackathon_ideas",
@@ -63,7 +63,7 @@ export const GetAllAuthorsIdQuery = () => {
   };
 };
 
-export const GetAllCompletedIdeasIdQuery = () => {
+const GetAllCompletedIdeasIdQuery = () => {
   return {
     display: "Get All Submissions",
     name: "hackathon_idea_submission",
@@ -72,7 +72,7 @@ export const GetAllCompletedIdeasIdQuery = () => {
   };
 };
 
-export const GetAllWinnerUserIdQuery = () => {
+const GetAllWinnerUserIdQuery = () => {
   return {
     display: "Get Winners",
     name: "hackathon_winners",
@@ -81,7 +81,7 @@ export const GetAllWinnerUserIdQuery = () => {
   };
 };
 
-export const InsertBadgeQuery = (badge_id, user_id) => {
+const InsertBadgeQuery = (badge_id, user_id) => {
   return {
     display: "Get Winners",
     name: "insert_meta_user_badges_one",
@@ -94,3 +94,12 @@ export const InsertBadgeQuery = (badge_id, user_id) => {
     return: ["id"],
   };
 };
+
+module.exports.GetAllParticipantIdeasMemberIdQuery =
+  GetAllParticipantIdeasMemberIdQuery;
+module.exports.GetUserDetailsQuery = GetUserDetailsQuery;
+module.exports.GetUserBadgeQuery = GetUserBadgeQuery;
+module.exports.GetAllAuthorsIdQuery = GetAllAuthorsIdQuery;
+module.exports.GetAllCompletedIdeasIdQuery = GetAllCompletedIdeasIdQuery;
+module.exports.GetAllWinnerUserIdQuery = GetAllWinnerUserIdQuery;
+module.exports.InsertBadgeQuery = InsertBadgeQuery;

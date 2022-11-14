@@ -1,12 +1,14 @@
-import * as dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config();
-import express from "express";
-import { UpdateHackRPlayBadges } from "./models/badges/hack-r-play-2022.js";
-import { sendMail } from "./services/email/index.js";
-import { email2Slug } from "./services/util/string.js";
-import os from "os";
-import serverless from "serverless-http";
-import bodyParser from "body-parser";
+const express = require("express");
+const {
+  UpdateHackRPlayBadges,
+} = require("./models/badges/hack-r-play-2022.js");
+const { sendMail } = require("./services/email/index.js");
+const { email2Slug } = require("./services/util/string.js");
+const os = require("os");
+const serverless = require("serverless-http");
+const bodyParser = require("body-parser");
 
 // Configuration
 var app = express();
@@ -59,6 +61,6 @@ app.post("/mail", function (req, res) {
 //   );
 // });
 
-export default serverless(app);
-// module.exports = app;
-// module.exports.handler = serverless(app);
+// export default serverless(app);
+module.exports = app;
+module.exports.handler = serverless(app);
