@@ -7,17 +7,22 @@
 	"license": "MIT",
 	"repository": "git@github.com:reactplay/react-play-web-svc.git",
 	"scripts": {
-		"start": "node server.js"
+		"build": "netlify-lambda build express --config webpack.config.js",
+		"start": "nodemon server.js"
 	},
-	"type": "module",
 	"dependencies": {
+		"@babel/core": "^7.20.2",
+		"@babel/node": "^7.20.2",
+		"@babel/preset-env": "^7.20.2",
 		"@nhost/nhost-js": "^1.5.2",
 		"@sendgrid/mail": "^7.7.0",
+		"body-parser": "^1.20.1",
 		"dotenv": "^16.0.3",
 		"express": "^4.17.1",
 		"json-graphql-parser": "^0.1.9",
+		"netlify-lambda": "^2.0.15",
 		"nodemailer": "^6.8.0",
-		"nodemailer-express-handlebars": "^5.0.0",
-		"react-play-pk": "^0.0.3"
+		"serverless-http": "^3.1.0",
+		"webpack-node-externals": "^3.0.0"
 	}
 }

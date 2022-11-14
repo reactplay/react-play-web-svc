@@ -1,6 +1,6 @@
-import sgMail from "@sendgrid/mail";
+const sgMail = require("@sendgrid/mail");
 
-export const sendMail = (sendgrid_api_key, email) => {
+const sendMail = (sendgrid_api_key, email) => {
   console.log(">>>>>>>>>>>>>>>>>");
   console.log(sendgrid_api_key);
   sgMail.setApiKey(sendgrid_api_key);
@@ -26,3 +26,5 @@ export const sendMail = (sendgrid_api_key, email) => {
       console.error(error);
     });
 };
+
+module.exports.sendMail = sendMail;
