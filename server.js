@@ -3,7 +3,7 @@ dotenv.config();
 import express from "express";
 import { UpdateHackRPlayBadges } from "./models/badges/hack-r-play-2022.js";
 import { sendMail } from "./services/email/index.js";
-import string from "react-play-pk";
+import { email2Slug } from "./services/util/string.js";
 
 // Configuration
 var app = express();
@@ -36,7 +36,7 @@ app.post("/badges", function (req, res) {
 
 app.post("/mail", function (req, res) {
   res.writeHead(200, { "Content-Type": "application/json" });
-  sendMail(SENDGRID_API_KEY, string.email2slug("koustov@live.com"));
+  sendMail(SENDGRID_API_KEY, email2slug("koustov@live.com"));
   var response = {
     response: "Successfully sent email.",
   };
