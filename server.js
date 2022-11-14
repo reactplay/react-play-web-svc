@@ -4,6 +4,7 @@ import express from "express";
 import { UpdateHackRPlayBadges } from "./models/badges/hack-r-play-2022.js";
 import { sendMail } from "./services/email/index.js";
 import { email2Slug } from "./services/util/string.js";
+import os from "os";
 
 // Configuration
 var app = express();
@@ -48,5 +49,7 @@ var server = app.listen(app.get("port"), function () {
   var host = server.address().address;
   var port = server.address().port;
 
-  console.log("ReactPlay Web Service is running on  http://%s:%s", host, port);
+  console.log(
+    `ReactPlay Web Service is running on  https://${os.hostname()}:${port}`
+  );
 });
