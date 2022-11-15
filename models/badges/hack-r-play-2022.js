@@ -8,8 +8,9 @@ const {
   GetAllCompletedIdeasIdQuery,
   GetAllWinnerUserIdQuery,
   InsertBadgeQuery,
-  GetUserDetailsQuery,
-} = require("./queries.js");
+} = require("../queries/badges/queries");
+
+const { GetUserDetailsQuery } = require("../queries/auth/user");
 
 const UpdateHackRPlayBadges = (url, sendgrid_api_key) => {
   const promises = [

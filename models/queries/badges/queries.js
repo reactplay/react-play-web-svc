@@ -7,27 +7,6 @@ const GetAllParticipantIdeasMemberIdQuery = () => {
   };
 };
 
-const GetUserDetailsQuery = (user_id) => {
-  return {
-    display: "Get User Details",
-    name: "users",
-    function: "users",
-    where: {
-      clause: {
-        operator: "and",
-        conditions: [
-          {
-            field: "id",
-            operator: "eq",
-            value: user_id,
-          },
-        ],
-      },
-    },
-    return: ["displayName", "email"],
-  };
-};
-
 const GetUserBadgeQuery = (user_id, badge_id) => {
   return {
     display: "Get User Badge Map",
@@ -97,7 +76,6 @@ const InsertBadgeQuery = (badge_id, user_id) => {
 
 module.exports.GetAllParticipantIdeasMemberIdQuery =
   GetAllParticipantIdeasMemberIdQuery;
-module.exports.GetUserDetailsQuery = GetUserDetailsQuery;
 module.exports.GetUserBadgeQuery = GetUserBadgeQuery;
 module.exports.GetAllAuthorsIdQuery = GetAllAuthorsIdQuery;
 module.exports.GetAllCompletedIdeasIdQuery = GetAllCompletedIdeasIdQuery;

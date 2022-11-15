@@ -1,4 +1,5 @@
-// const json_gql = require("json-graphql-parser/v2/index.js");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const BACKEND_URL = `${process.env.NHOST_BACKEND_URL}/${process.env.NHOST_VERSION}/${process.env.NHOST_ENDPOINT}`;
 
@@ -22,7 +23,7 @@ const gsubmit_multi = async (requests, url, reqheder) => {
  */
 const gsubmit = async (request, url, reqheder) => {
   const json_gql = await import("json-graphql-parser/v2/index.js");
-  return json_gql.submit(request, url, undefined, true);
+  return json_gql.submit(request, BACKEND_URL, undefined, true);
 };
 
 const submitMutation = (query, object) => {
