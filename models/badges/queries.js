@@ -84,8 +84,8 @@ const GetAllWinnerUserIdQuery = () => {
 const InsertBadgeQuery = (badge_id, user_id) => {
   return {
     display: "Get Winners",
-    name: "insert_meta_user_badges_one",
-    function: "insert_meta_user_badges_one",
+    name: "insert_meta_user_badge_map_one",
+    function: "insert_meta_user_badge_map_one",
     write: true,
     object: {
       badge_id: badge_id,
