@@ -11,9 +11,6 @@
 		"start": "nodemon server.js"
 	},
 	"dependencies": {
-		"@babel/core": "^7.20.2",
-		"@babel/node": "^7.20.2",
-		"@babel/preset-env": "^7.20.2",
 		"@nhost/nhost-js": "^1.5.2",
 		"@sendgrid/mail": "^7.7.0",
 		"body-parser": "^1.20.1",
@@ -21,7 +18,6 @@
 		"express": "^4.17.1",
 		"json-graphql-parser": "^0.1.9",
 		"netlify-lambda": "^2.0.15",
-		"nodemailer": "^6.8.0",
 		"serverless-http": "^3.1.0",
 		"webpack-node-externals": "^3.0.0",
 		"node-html-to-image": "^3.2.4"
