@@ -1,31 +1,32 @@
-import { HackRPlayBadges } from "../../services/badges.js";
+const { HackRPlayBadges } = require("../../services/badges.js");
 // import { sendMail } from "../../services/email/index.js";
-import { submit } from "../../services/submit.js";
-import {
+const { gsubmit } = require("../../services/submit.js");
+const {
   GetAllParticipantIdeasMemberIdQuery,
   GetUserBadgeQuery,
   GetAllAuthorsIdQuery,
   GetAllCompletedIdeasIdQuery,
   GetAllWinnerUserIdQuery,
   InsertBadgeQuery,
-  GetUserDetailsQuery,
-} from "./queries.js";
+} = require("../queries/badges/queries");
 
-export const UpdateHackRPlayBadges = (url, sendgrid_api_key) => {
+const { GetUserDetailsQuery } = require("../queries/auth/user");
+
+const UpdateHackRPlayBadges = (url, sendgrid_api_key) => {
   const promises = [
-    submit(GetAllParticipantIdeasMemberIdQuery(), url),
-    submit(GetAllCompletedIdeasIdQuery(), url),
-    submit(GetAllWinnerUserIdQuery(), url),
-    submit(GetAllAuthorsIdQuery(), url),
+    gsubmit(GetAllParticipantIdeasMemberIdQuery(), url),
+    gsubmit(GetAllCompletedIdeasIdQuery(), url),
+    gsubmit(GetAllWinnerUserIdQuery(), url),
+    gsubmit(GetAllAuthorsIdQuery(), url),
   ];
   return Promise.all(promises)
     .then((res) => {
-      const submittedContributors = res[0];
+      const gsubmittedContributors = res[0];
       const completedIdeas = res[1];
       const winningIdeas = res[2];
       const authorIds = res[3];
 
-      const allContributors = submittedContributors;
+      const allContributors = gsubmittedContributors;
 
       authorIds.forEach((auth) => {
         allContributors.push({
@@ -42,30 +43,32 @@ export const UpdateHackRPlayBadges = (url, sendgrid_api_key) => {
       const winners = getAllWinnersId(allContributors, winningIdeas);
       // console.log(`Participants : ${contributorsId.length}`);
       // console.log(contributorsId);
-      // console.log(`Submitters: ${completedContributorsId.length}`);
+      // console.log(`gsubmitters: ${completedContributorsId.length}`);
       // console.log(completedContributorsId);
       // console.log(`Winners : ${winners.length}`);
       // console.log(winners);
-      const submitPromises = [];
+      const gsubmitPromises = [];
       contributorsId.forEach((cont) => {
-        submitPromises.push(
+        gsubmitPromises.push(
           InsertBadge(cont, HackRPlayBadges.participant, url)
         );
       });
 
       completedContributorsId.forEach((cont) => {
-        submitPromises.push(InsertBadge(cont, HackRPlayBadges.submitters, url));
+        gsubmitPromises.push(
+          InsertBadge(cont, HackRPlayBadges.gsubmitters, url)
+        );
       });
 
       winners.forEach((cont) => {
-        submitPromises.push(InsertBadge(cont, HackRPlayBadges.winners, url));
+        gsubmitPromises.push(InsertBadge(cont, HackRPlayBadges.winners, url));
       });
-      return Promise.all(submitPromises)
+      return Promise.all(gsubmitPromises)
         .then((res) => {
           // sendMail(sendgrid_api_key);
           return {
             winners: winners,
-            submitters: completedContributorsId,
+            gsubmitters: completedContributorsId,
             participants: contributorsId,
           };
         })
@@ -89,19 +92,19 @@ const getAllContributorsId = (allContributors) => {
 };
 
 const getAllCompletedContributorsId = (allContributors, completedIdeas) => {
-  const submitters = [];
+  const gsubmitters = [];
   allContributors.forEach((cont) => {
     const completedIdeaFilter = completedIdeas.filter(
       (ci) => ci.idea_id === cont.idea_id
     );
     if (
       completedIdeaFilter.length > 0 &&
-      submitters.indexOf(cont.user_id) < 0
+      gsubmitters.indexOf(cont.user_id) < 0
     ) {
-      submitters.push(cont.user_id);
+      gsubmitters.push(cont.user_id);
     }
   });
-  return submitters;
+  return gsubmitters;
 };
 
 const getAllWinnersId = (allContributors, winningIdeas) => {
@@ -115,7 +118,7 @@ const getAllWinnersId = (allContributors, winningIdeas) => {
 };
 
 const IsUserBadgeExists = async (user_id, badge_id, url) => {
-  const res = await submit(GetUserBadgeQuery(user_id, badge_id), url);
+  const res = await gsubmit(GetUserBadgeQuery(user_id, badge_id), url);
   console.log(res, res.length, res.length > 0);
   return res.length > 0;
 };
@@ -123,10 +126,12 @@ const IsUserBadgeExists = async (user_id, badge_id, url) => {
 const InsertBadge = async (user_id, badge_id, url) => {
   if (!(await IsUserBadgeExists(user_id, badge_id, url))) {
     console.log(`Inserting user: ${user_id}`);
-    const userDetails = await submit(GetUserDetailsQuery(user_id), url);
+    const userDetails = await gsubmit(GetUserDetailsQuery(user_id), url);
     console.log(userDetails);
-    return submit(InsertBadgeQuery(user_id, badge_id), url);
+    return gsubmit(InsertBadgeQuery(user_id, badge_id), url);
   } else {
     console.log(`User badge exists: ${user_id}`);
   }
 };
+
+module.exports.UpdateHackRPlayBadges = UpdateHackRPlayBadges;

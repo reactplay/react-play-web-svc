@@ -1,7 +1,5 @@
-import {
-  submit as gsubmit,
-  submit_multi as gsubmit_multi,
-} from "json-graphql-parser/v2/index.js";
+const dotenv = require("dotenv");
+dotenv.config();
 
 const BACKEND_URL = `${process.env.NHOST_BACKEND_URL}/${process.env.NHOST_VERSION}/${process.env.NHOST_ENDPOINT}`;
 
@@ -11,8 +9,9 @@ const BACKEND_URL = `${process.env.NHOST_BACKEND_URL}/${process.env.NHOST_VERSIO
  * @param {string}           url Optional.
  * @param {object}           reqheder Optional.
  */
-export const submit_multi = (requests, url, reqheder) => {
-  return gsubmit_multi(requests, BACKEND_URL);
+const gsubmit_multi = async (requests, url, reqheder) => {
+  const json_gql = await import("json-graphql-parser/v2/index.js");
+  return json_gql.submit_multi(requests, BACKEND_URL);
 };
 
 /**
@@ -22,12 +21,17 @@ export const submit_multi = (requests, url, reqheder) => {
  * @param {object}           reqheder Optional.
  * @returns {Promise} single promise
  */
-export const submit = (request, url, reqheder) => {
-  return gsubmit(request, url, undefined, true);
+const gsubmit = async (request, url, reqheder) => {
+  const json_gql = await import("json-graphql-parser/v2/index.js");
+  return json_gql.submit(request, BACKEND_URL, undefined, true);
 };
 
-export const submitMutation = (query, object) => {
+const submitMutation = (query, object) => {
   const mutationQuery = query;
   mutationQuery.object = object;
-  return submit(mutationQuery);
+  return gsubmit(mutationQuery);
 };
+
+module.exports.submitMutation = submitMutation;
+module.exports.gsubmit_multi = gsubmit_multi;
+module.exports.gsubmit = gsubmit;
