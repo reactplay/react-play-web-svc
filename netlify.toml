@@ -1,11 +1,3 @@
 [build]
-
-  base = "."
-  publish = "build/"
-  command = "node server.js"
-
-[[redirects]]
-
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  command = "npm install && npm run build"
+  functions = "functions"
