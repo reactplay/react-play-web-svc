@@ -9,6 +9,7 @@ const { email2Slug } = require("../services/util/string.js");
 const os = require("os");
 const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 // Configuration
 var app = express();
@@ -31,13 +32,16 @@ router.get("/", (req, res) => {
   );
   res.end();
 });
+
 router.get("/hc", function (req, res) {
+  console.log("Received HealthCheck request");
   res.writeHead(200, { "Content-Type": "text/html" });
   res.write("<h1>ReactPlay web service is <b>Healthy</b></h1>");
   res.end();
 });
 
 router.post("/badges", function (req, res) {
+  console.log("Received request to update badges");
   res.writeHead(200, { "Content-Type": "application/json" });
   UpdateHackRPlayBadges(BACKEND_URL, SENDGRID_API_KEY).then((result) => {
     var response = {
@@ -48,15 +52,15 @@ router.post("/badges", function (req, res) {
   });
 });
 
-router.post("/mail", function (req, res) {
-  res.writeHead(200, { "Content-Type": "application/json" });
-  sendMail(SENDGRID_API_KEY, email2slug("koustov@live.com"));
-  var response = {
-    response: "Successfully sent email.",
-  };
-  console.log(response);
-  res.end(JSON.stringify({ result: "done" }));
-});
+// router.post("/mail", function (req, res) {
+//   res.writeHead(200, { "Content-Type": "application/json" });
+//   sendMail(SENDGRID_API_KEY, email2slug("koustov@live.com"));
+//   var response = {
+//     response: "Successfully sent email.",
+//   };
+//   console.log(response);
+//   res.end(JSON.stringify({ result: "done" }));
+// });
 
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
