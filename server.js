@@ -49,7 +49,6 @@ app.get("/:userId/badges", async function (req, res) {
       <style>
       body{
         width:800px;
-        height:500px;
         padding: 1rem 2rem;
         background:#010326;
         color:#ffffff;
