@@ -1,4 +1,4 @@
-<html>
+const HTMLTemplate = `<html>
       <style>
       * {
   font-family: sans-serif;
@@ -156,4 +156,6 @@ body {
   {{user_badges}}
   </div>
 </div>
-<body>
+<body>`;
+
+module.exports.HTMLTemplate = HTMLTemplate;
