@@ -6,6 +6,7 @@ const {
 } = require("../queries/auth/user");
 const nodeHtmlToImage = require("node-html-to-image");
 const { GetTemplateFileContent } = require("../../services/util/template");
+const { TakeScreenShot } = require("../../services/template-provider");
 
 const UpdateBadges = (req, res) => {
   console.log("Received request to update badges");
@@ -38,13 +39,16 @@ const MetaImage = async (req, res) => {
     //   getUser[0].avatarUrl,
     //   images
     // ),
-    const image = await nodeHtmlToImage({
-      html: "<html><body>Hello world!</body></html>",
-    });
-    console.log(`Image created`);
-    res.writeHead(200, {
-      "Content-Type": "image/jpeg",
-    });
+
+    const image = await TakeScreenShot();
+
+    // const image = await nodeHtmlToImage({
+    //   html: "<html><body>Hello world!</body></html>",
+    // });
+    // console.log(`Image created`);
+    // res.writeHead(200, {
+    //   "Content-Type": "image/jpeg",
+    // });
     res.end(image, "base64");
   } catch (e) {
     console.error("Something went wrong");
