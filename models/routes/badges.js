@@ -47,7 +47,7 @@ const MetaImage = async (req, res) => {
     res.end(image, "base64");
   } catch (e) {
     console.error("Something went wrong");
-    console.log(JSON.stringify(e, undefined, 2));
+    console.log(e);
     res.end(`Something went wrong: ${e}`);
   }
 };
