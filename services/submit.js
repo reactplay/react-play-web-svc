@@ -23,7 +23,7 @@ const gsubmit_multi = async (requests, url, reqheder) => {
  */
 const gsubmit = async (request, url, reqheder) => {
   const json_gql = await import("json-graphql-parser/v2/index.js");
-  return json_gql.submit(request, BACKEND_URL, undefined, true);
+  return json_gql.submit(request, BACKEND_URL, undefined, false);
 };
 
 const submitMutation = (query, object) => {

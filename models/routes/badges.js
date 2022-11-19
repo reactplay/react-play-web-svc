@@ -10,7 +10,7 @@ const { GetTemplateFileContent } = require("../../services/util/template");
 const UpdateBadges = (req, res) => {
   console.log("Received request to update badges");
   res.writeHead(200, { "Content-Type": "application/json" });
-  UpdateHackRPlayBadges(BACKEND_URL, SENDGRID_API_KEY).then((result) => {
+  UpdateHackRPlayBadges().then((result) => {
     var response = {
       response: "Successfully updated badges.",
     };

@@ -4,8 +4,6 @@ const express = require("express");
 const {
   UpdateHackRPlayBadges,
 } = require("../models/badges/hack-r-play-2022.js");
-const { sendMail } = require("../services/email/index.js");
-const { email2Slug } = require("../services/util/string.js");
 const os = require("os");
 const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
@@ -21,10 +19,6 @@ const router = express.Router();
 if (process.env.SERVER_PORT) {
   app.set("port", process.env.SERVER_PORT);
 }
-
-const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
-
-console.log(SENDGRID_API_KEY);
 
 router.get("/", (req, res) => {
   BaseRoute(req, res);
