@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"repository": "git@github.com:reactplay/react-play-web-svc.git",
 	"scripts": {
-		"build": "netlify-lambda build express --config webpack.config.js",
+		"build": "node node_modules/puppeteer/install.js && netlify-lambda build express --config webpack.config.js",
 		"start": "node node_modules/puppeteer/install.js && nodemon server.js"
 	},
 	"dependencies": {
