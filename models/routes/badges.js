@@ -23,7 +23,9 @@ const MetaImage = async (req, res) => {
   console.log(`Badge request received for ${req.params.userId}`);
   try {
     const getUser = await gsubmit(GetUserDetailsQuery(req.params.userId));
+    console.log(`User details: ${JSON.stringify(getUser, undefined, 2)}`);
     const getBadges = await gsubmit(GetUserAllBadgeQuery(req.params.userId));
+    console.log(`Badge details: ${getBadges[0]?.id}`);
     let images = ``;
     for (let i of await getBadges) {
       images = images.concat(
@@ -38,6 +40,7 @@ const MetaImage = async (req, res) => {
         images
       ),
     });
+    console.log(`Image created`);
     res.writeHead(200, {
       "Content-Type": "image/jpeg",
     });
