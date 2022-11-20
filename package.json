@@ -20,7 +20,7 @@
 		"json-graphql-parser": "^0.1.9",
 		"netlify-lambda": "^2.0.15",
 		"node-html-to-image": "^3.2.4",
-		"puppeteer": "^19.2.2",
+		"puppeteer": "^18.2.1",
 		"serverless-http": "^3.1.0",
 		"webpack-node-externals": "^3.0.0"
 	}
