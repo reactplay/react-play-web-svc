@@ -37,16 +37,11 @@ const ScreenCapture = async () => {
     retry: 3,
     silent: false,
   };
-  const stats = await PCR(option);
-  const browser = await stats.puppeteer
-    .launch({
-      headless: false,
-      args: ["--no-sandbox"],
-      executablePath: stats.executablePath,
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  const stats = await PCR();
+  const browser = await puppeteer.launch({
+    executablePath: stats.executablePath,
+    headless: false,
+  });
   const page = await browser.newPage();
   await page.goto("https://www.npmjs.com/package/puppeteer-chromium-resolver");
   const base64 = await page.screenshot({ encoding: "base64" });
