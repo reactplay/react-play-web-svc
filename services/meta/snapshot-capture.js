@@ -36,7 +36,7 @@ const ScreenCapture = async () => {
     retry: 3,
     silent: false,
   };
-  const stats = await PCR();
+  const stats = await PCR(option);
   process.env.PUPPETEER_EXECUTABLE_PATH = stats.executablePath;
   const browser = await puppeteer.launch({
     executablePath: stats.executablePath,
