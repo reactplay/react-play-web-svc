@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const { UpdateBadges, MetaImage } = require("../models/routes/badges.js");
 const { HealthCheck, BaseRoute } = require("../models/routes/base.js");
+const { Screenshot } = require("../services/meta/snapshot-capture.js");
 
 // Configuration
 var app = express();
@@ -33,7 +34,9 @@ router.post("/badges", function (req, res) {
 });
 
 router.get("/:userId/badges", async function (req, res) {
-  MetaImage(req, res);
+  // MetaImage(req, res);
+  const base64 = await Screenshot();
+  res.end(base64);
 });
 
 app.use(bodyParser.json());
