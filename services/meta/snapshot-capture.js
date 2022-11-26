@@ -23,7 +23,6 @@ const ScreenCapture = async () => {
   const PCR = require("puppeteer-chromium-resolver");
   const puppeteer = require("puppeteer");
   //update global env
-  process.env.PUPPETEER_EXECUTABLE_PATH = stats.executablePath;
   const option = {
     revision: "",
     detectionPath: "",
@@ -38,6 +37,7 @@ const ScreenCapture = async () => {
     silent: false,
   };
   const stats = await PCR();
+  process.env.PUPPETEER_EXECUTABLE_PATH = stats.executablePath;
   const browser = await puppeteer.launch({
     executablePath: stats.executablePath,
     headless: false,
