@@ -6,7 +6,7 @@ console.log("The dir path is : ", __dirname);
  */
 module.exports = {
   // Changes the cache location for Puppeteer.
-  cacheDirectory: join(__dirname, ".cache", "puppeteer"),
+  cacheDirectory: "/opt/build/repo", //join(__dirname, ".cache", "puppeteer"),
   experiments: {
     macArmChromiumEnabled: true,
   },
