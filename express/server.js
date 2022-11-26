@@ -10,7 +10,10 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const { UpdateBadges, MetaImage } = require("../models/routes/badges.js");
 const { HealthCheck, BaseRoute } = require("../models/routes/base.js");
-const { Screenshot } = require("../services/meta/snapshot-capture.js");
+const {
+  Screenshot,
+  ScreenCapture,
+} = require("../services/meta/snapshot-capture.js");
 
 // Configuration
 var app = express();
@@ -35,7 +38,7 @@ router.post("/badges", function (req, res) {
 
 router.get("/:userId/badges", async function (req, res) {
   // MetaImage(req, res);
-  const base64 = await Screenshot();
+  const base64 = await ScreenCapture();
   res.end(base64);
 });
 
