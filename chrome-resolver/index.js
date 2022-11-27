@@ -431,8 +431,8 @@ const revisionHandler = (option) => {
 //=========================================================================================
 
 const getStatsPath = () => {
-  const homePath = os.homedir();
-  const statsPath = path.resolve("./pcr-stats.json");
+  console.log(__dirname);
+  const statsPath = path.resolve("./.pcr-stats.json");
   return statsPath;
 };
 
