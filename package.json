@@ -19,10 +19,12 @@
 		"json-graphql-parser": "^0.1.9",
 		"netlify-lambda": "^2.0.15",
 		"node-html-to-image": "^3.2.4",
-		"puppeteer": "^19.3.0",
-		"puppeteer-chromium-resolver": "^19.1.0",
 		"serverless-http": "^3.1.0",
-		"webpack-node-externals": "^3.0.0"
+		"webpack-node-externals": "^3.0.0",
+		"eight-colors": "^1.0.2",
+        "gauge": "^5.0.0",
+        "ping-monitor": "^0.6.2",
+        "puppeteer-core": "^19.0.0"
 	},
 	"pcr": {
 		"revision": "869685"

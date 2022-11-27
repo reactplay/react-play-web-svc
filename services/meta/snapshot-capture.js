@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer"); // Require Puppeteer moduleconst url = "https://www.testim.io/"; // Set website you want to screenshot
+const PCR = require("../../chrome-resolver");
 const url = "https://www.testim.io/"; // Set website you want to screenshot
 
 const Screenshot = async () => {
@@ -20,7 +21,6 @@ const Screenshot = async () => {
 };
 
 const ScreenCapture = async () => {
-  const PCR = require("puppeteer-chromium-resolver");
   const puppeteer = require("puppeteer");
   //update global env
   const option = {

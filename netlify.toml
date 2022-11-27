@@ -4,4 +4,4 @@
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["puppeteer-chromium-resolver", "express", "import-fresh"]
+  external_node_modules = ["puppeteer", "express", "import-fresh"]

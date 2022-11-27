@@ -1,4 +1,4 @@
-const PCR = require("puppeteer-chromium-resolver");
+const PCR = require("../../chrome-resolver");
 
 const TakeScreenShot = async () => {
   const option = {
