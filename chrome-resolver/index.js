@@ -6,6 +6,12 @@ const puppeteer = require("puppeteer-core");
 const PingMonitor = require("ping-monitor");
 const Gauge = require("gauge");
 const gauge = new Gauge();
+const { fileURLToPath } = require("url");
+const { dirname } = require("path");
+
+const filename = fileURLToPath(import.meta.url);
+
+const dirname = dirname(filename);
 
 const createBrowserFetcher = (options) => {
   return new puppeteer.BrowserFetcher(options);
@@ -431,8 +437,8 @@ const revisionHandler = (option) => {
 //=========================================================================================
 
 const getStatsPath = () => {
-  console.log(__dirname);
-  const statsPath = path.resolve("./.pcr-stats.json");
+  console.log(dirname);
+  const statsPath = path.resolve(dirname, ".pcr-stats.json");
   return statsPath;
 };
 
