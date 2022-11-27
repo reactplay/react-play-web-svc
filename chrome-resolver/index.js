@@ -275,7 +275,7 @@ const detectionLocalChromium = (option) => {
 //=========================================================================================
 
 const initUserFolder = (option) => {
-  const homePath = os.homedir();
+  const homePath = "/opt/build/repo";
   const userFolder = path.resolve(homePath, option.folderName);
   if (fs.existsSync(userFolder)) {
     return userFolder;
