@@ -11,7 +11,7 @@ const { dirname } = require("path");
 
 const filename = fileURLToPath(import.meta.url);
 
-const dirname = dirname(filename);
+const dir_name = dirname(filename);
 
 const createBrowserFetcher = (options) => {
   return new puppeteer.BrowserFetcher(options);
@@ -437,8 +437,8 @@ const revisionHandler = (option) => {
 //=========================================================================================
 
 const getStatsPath = () => {
-  console.log(dirname);
-  const statsPath = path.resolve(dirname, ".pcr-stats.json");
+  console.log(dir_name);
+  const statsPath = path.resolve(dir_name, ".pcr-stats.json");
   return statsPath;
 };
 
