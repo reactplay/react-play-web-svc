@@ -431,6 +431,7 @@ const revisionHandler = (option) => {
 //=========================================================================================
 
 const getStatsPath = () => {
+  console.log(process.cwd());
   const statsPath = "/opt/build/repo/.pcr-stats.json";
   return statsPath;
 };
