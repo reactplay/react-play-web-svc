@@ -33,22 +33,8 @@ const MetaImage = async (req, res) => {
         `<div><img src="${i.badge_id_map.image}" style="height:100%;width:100%"/></div>`
       );
     }
-    // GetTemplateFileContent(
-    //   getUser[0].displayName,
-    //   getUser[0].email,
-    //   getUser[0].avatarUrl,
-    //   images
-    // ),
 
     const image = await TakeScreenShot();
-
-    // const image = await nodeHtmlToImage({
-    //   html: "<html><body>Hello world!</body></html>",
-    // });
-    // console.log(`Image created`);
-    // res.writeHead(200, {
-    //   "Content-Type": "image/jpeg",
-    // });
     res.end(image, "base64");
   } catch (e) {
     console.error("Something went wrong");

@@ -1,30 +1,33 @@
-const sgMail = require("@sendgrid/mail");
+const dotenv = require("dotenv");
+dotenv.config();
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+const EMAIL_TEMPLATE_ID = process.env.SENDGRID_EMAIL_TEMPLATE_ID;
 
-const sendMail = (sendgrid_api_key, email) => {
-  console.log(">>>>>>>>>>>>>>>>>");
-  console.log(sendgrid_api_key);
-  sgMail.setApiKey(sendgrid_api_key);
-  const msg = {
-    to: "koustov@gmail.com", // Change to your recipient
-    from: "ioreactplay@gmail.com", // Change to your verified sender
-    subject: "Sending with SendGrid is Fun",
-    text: "and easy to do anywhere, even with Node.js",
-    html: "<strong>and easy to do anywhere, even with Node.js</strong>",
-    templateId: "d-242034c978464ef7af0508d7c2c1270e",
-    dynamicTemplateData: {
-      for: "Winner",
-      badge_name: "Hack-R-Play Winner",
-      user_email_slug: email,
-    },
-  };
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log("Email sent");
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(SENDGRID_API_KEY);
+
+console.log(`API KEY: ${SENDGRID_API_KEY}`);
+const sendMail = (email, badge) => {
+  if (email === "smahanta118@gmail.com" || email === "sansup49@gmail.com") {
+    console.log(`Sending mail to : ${email} for ${badge}`);
+    const msg = {
+      to: email,
+      from: "ioreactplay@gmail.com",
+      templateId: EMAIL_TEMPLATE_ID,
+      dynamicTemplateData: {
+        badge_name: badge,
+        user_email_slug: email,
+      },
+    };
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log(`Email sent to : ${email}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 };
 
 module.exports.sendMail = sendMail;
