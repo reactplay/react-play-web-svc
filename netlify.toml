@@ -4,7 +4,6 @@
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["puppeteer", "express", "import-fresh"]
 
 [[redirects]]
   from = "/api/*"
