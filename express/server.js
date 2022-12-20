@@ -14,6 +14,8 @@ const {
   Screenshot,
   ScreenCapture,
 } = require("../services/meta/snapshot-capture.js");
+const { PublishedPlays, GetGitResult } = require("../models/routes/plays.js");
+const { GetPublishedPlays } = require("../models/plays/published.js");
 
 // Configuration
 var app = express();
@@ -40,6 +42,16 @@ router.get("/:userId/badges", async function (req, res) {
   // MetaImage(req, res);
   const base64 = await ScreenCapture();
   res.end(base64);
+});
+
+// Play Related
+router.get("/plays/published", async function (req, res) {
+  PublishedPlays(req, res);
+});
+
+// Git Related
+router.post("/git/query", async function (req, res) {
+  await GetGitResult(req, res);
 });
 
 app.use(bodyParser.json());
