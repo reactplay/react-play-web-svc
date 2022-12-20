@@ -8,13 +8,15 @@
 	"repository": "git@github.com:reactplay/react-play-web-svc.git",
 	"scripts": {
 		"build": "node node_modules/puppeteer/install.js && netlify-lambda build express --config webpack.config.js",
-		"start": "node node_modules/puppeteer/install.js && nodemon server.js"
+		"start": "node node_modules/puppeteer/install.js && nodemon server.js",
+		"dev": "netlify dev"
 	},
 	"dependencies": {
 		"@nhost/nhost-js": "^1.5.2",
 		"@sendgrid/mail": "^7.7.0",
 		"axios": "^1.2.1",
 		"body-parser": "^1.20.1",
+		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",
 		"eight-colors": "^1.0.2",
 		"express": "^4.17.1",

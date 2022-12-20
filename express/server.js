@@ -1,6 +1,8 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
+var cors = require("cors");
+
 const {
   UpdateHackRPlayBadges,
 } = require("../models/badges/hack-r-play-2022.js");
@@ -20,6 +22,7 @@ const { GetPublishedPlays } = require("../models/plays/published.js");
 // Configuration
 var app = express();
 const router = express.Router();
+app.use(cors());
 
 // Initialization
 if (process.env.SERVER_PORT) {
@@ -45,12 +48,12 @@ router.get("/:userId/badges", async function (req, res) {
 });
 
 // Play Related
-router.get("/plays/published", async function (req, res) {
+router.get("/api/plays/published", async function (req, res) {
   PublishedPlays(req, res);
 });
 
 // Git Related
-router.post("/git/query", async function (req, res) {
+router.post("/api/git/query", async function (req, res) {
   await GetGitResult(req, res);
 });
 
