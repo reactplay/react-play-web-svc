@@ -25,7 +25,11 @@ const getPublishedPlays = (req, res) => {
   )
     .then((res) => {
       const data = res?.data?.repository?.object?.entries;
-      return data.map((d) => d.name);
+      if (data) {
+        return data.map((d) => d.name);
+      } else {
+        return [];
+      }
     })
     .catch((error) => {
       throw error;
