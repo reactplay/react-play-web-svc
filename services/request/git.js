@@ -22,10 +22,14 @@ const getPublishedPlays = (req, res) => {
       variables: {},
     },
     GITHUB_PAT
-  ).then((res) => {
-    const data = res.data.repository.object.entries;
-    return data.map((d) => d.name);
-  });
+  )
+    .then((res) => {
+      const data = res?.data?.repository?.object?.entries;
+      return data.map((d) => d.name);
+    })
+    .catch((error) => {
+      throw error;
+    });
 };
 
 const getResult = (req, res) => {
