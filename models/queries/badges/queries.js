@@ -60,7 +60,7 @@ const GetAllWinnerUserIdQuery = () => {
   };
 };
 
-const InsertBadgeQuery = (badge_id, user_id) => {
+const InsertBadgeQuery = (user_id, badge_id) => {
   return {
     display: "Get Winners",
     name: "insert_meta_user_badge_map_one",

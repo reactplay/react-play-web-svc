@@ -7,19 +7,29 @@
 	"license": "MIT",
 	"repository": "git@github.com:reactplay/react-play-web-svc.git",
 	"scripts": {
-		"build": "netlify-lambda build express --config webpack.config.js",
-		"start": "nodemon server.js"
+		"build": "node node_modules/puppeteer/install.js && netlify-lambda build express --config webpack.config.js",
+		"start": "node node_modules/puppeteer/install.js && nodemon server.js",
+		"dev": "netlify dev"
 	},
 	"dependencies": {
 		"@nhost/nhost-js": "^1.5.2",
 		"@sendgrid/mail": "^7.7.0",
+		"axios": "^1.2.1",
 		"body-parser": "^1.20.1",
+		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",
+		"eight-colors": "^1.0.2",
 		"express": "^4.17.1",
+		"gauge": "^5.0.0",
 		"json-graphql-parser": "^0.1.9",
 		"netlify-lambda": "^2.0.15",
+		"node-html-to-image": "^3.2.4",
+		"ping-monitor": "^0.6.2",
+		"puppeteer-core": "^19.0.0",
 		"serverless-http": "^3.1.0",
-		"webpack-node-externals": "^3.0.0",
-		"node-html-to-image": "^3.2.4"
+		"webpack-node-externals": "^3.0.0"
+	},
+	"pcr": {
+		"revision": "869685"
 	}
 }
